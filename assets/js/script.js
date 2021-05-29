@@ -1,3 +1,4 @@
+var quizContainer = document.querySelector("#quizContainer"); 
 var scoreCounter= 0; 
 
 var myQuiz = [
@@ -24,23 +25,32 @@ var myQuiz = [
 ]; 
  
 var result = myQuiz.filter(obj => {
-    console.log(obj.correctAnswer); 
+    return obj.correctAnswer; 
     
 })
 
 var questionIndex = -1; 
- 
+
+function start() {
+    var startButton = document.createElement("input");
+    startButton.type = "button";
+    startButton.value = "Begin!";
+    startButton.className = "startBtn"
+    startButton.addEventListener("click", nextQuestion); 
+    quizContainer.appendChild(startButton); 
+}
+
 
 function nextQuestion() {
-    document.body.innerHTML = '';
+    document.body.innerHTML = "";
     ++questionIndex; 
     document.write(myQuiz[questionIndex].question + "<br />");
 
         for (var i=0; i < myQuiz[questionIndex].choices.length; i++) {
-            var radioButtons = document.createElement("input");
-            radioButtons.type = "radio"; 
-            radioButtons.addEventListener("click", showResults); 
-        // document.write("<input type=radio id=myRadio name=radAnswer>" + myQuiz[questionIndex].choices[i] + "<br />");
+            // var radioButton = document.createElement("input");
+            // radioButton.type = "radio"; 
+            // radioButton.addEventListener("click", ); 
+        document.write("<input type=radio id=myRadio name=userAnswer>" + myQuiz[questionIndex].choices[i] + "<br />");
         }
     
 
@@ -49,7 +59,7 @@ function nextQuestion() {
         nextButton.type = "button";
         nextButton.value = "Next question";
         nextButton.addEventListener("click", nextQuestion);
-        document.body.appendChild(nextButton);
+        quizContainer.appendChild(nextButton);
     }
 
     else {
@@ -57,15 +67,26 @@ function nextQuestion() {
         submitButton.type = "button";
         submitButton.value = "Submit";
         submitButton.addEventListener("click", showResults);
-        document.body.appendChild(submitButton); 
+        quizContainer.appendChild(submitButton); 
     }
 
-
-
+    
 };
 
 function showResults() {
 
 }
 
-nextQuestion(); 
+function checkAnswer() {
+    if ("userAnswer" === result) {
+        console.log(result);
+    }
+
+    else {
+        
+    }
+
+    // nextQuestion();
+}
+
+start();
