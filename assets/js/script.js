@@ -1,91 +1,62 @@
-var quizContainer = document.getElementById("form-area"); 
-var questions = document.getElementById("questions");
-var submitButton = document.getElementById("submit");
-var initialInput = ;
+var scoreCounter= 0; 
 
-var scoreCounter = 0; 
-var correctAnswer = 1; 
+var myQuiz = [
+    {
+    question: "What is the capital of California?",
+    choices: ["Los Angeles", "San Francisco", "Sacramento", "San Diego", "Oakland"],
+    correctAnswer: "Sacramento"
+    }, 
+    {
+    question: "What is the capital of Pennsylvania?",
+    choices: ["Pittsburgh", "Philadelphia", "Harrisburg", "Erie"],
+    correctAnswer: "Harrisburg"
+    }, 
+    {
+    question: "What is the capital of Florida?",
+    choices: ["Tallahassee", "Tampa", "Miami", "Jacksonville"],
+    correctAnswer: "Tallahassee"
+    },
+    {
+    question: "What is the capital of Georgia?",
+    choices: ["Augusta", "Atlanta", "Savannah"],
+    correctAnswer: "Atlanta"
+    }
+]; 
  
- 
-function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+ var questionIndex = -1; 
 
-    function showQuestions(questions,quizContainer) {
+function nextQuestion() {
+    document.body.innerHTML = '';
+    ++questionIndex;
+    document.write(myQuiz[questionIndex].question + "<br />");
 
-    }
-
-    function showResults(questions, quizContainer, resultsContainer){
-
-    }
-
-    showQuestions(questions, quizContainer);
-
-    submitButton.onclick = function() {
-        showResults(questions, quizContainer, resultsContainer); 
-    }
-}
-
-function showQuestions(questions, quizContainer) {
-    var output = []; 
-    var answers; 
-
-    for(var i=0; i<questions.length; i++){
-        answers: []; 
-
-        for(letter in questions[i].answers){
-
-			// ...add an html radio button
-			answers.push(
-				'<label>'
-					+ '<input type="radio" name="question'+i+'" value="'+letter+'">'
-					+ letter + ': '
-					+ questions[i].answers[letter]
-				+ '</label>'
-			);
-		}
-
-        output.push(
-            '<div class="question">' + questions[i].question + '</div>'
-			+ '<div class="answers">' + answers.join('') + '</div>'
-        ); 
-    }
-
-    quizContainer.innerHTML = output.join(''); 
+        for (var i=0; i < myQuiz[questionIndex].choices.length; i++) {
+        document.write("<input type=radio id=myRadio name=radAnswer>" + myQuiz[questionIndex].choices[i] + "<br />");
+        }
     
+    if ()
+    if (questionIndex < (myQuiz.length -1 )) {
+        var nextButton = document.createElement("input");
+        nextButton.type = "button";
+        nextButton.value = "Next question";
+        nextButton.addEventListener('click', nextQuestion);
+        document.body.appendChild(nextButton);
+    }
+
+    else if (questionIndex < (myQuiz.length)) {
+        var submitButton = document.createElement("input");
+        submitButton.type = "button";
+        submitButton.value = "Submit";
+        submitButton.addEventListener("click", showResults);
+        document.body.appendChild(submitButton); 
+    }
+
+};
+
+function showResults() {
+
 }
 
-showQuestions(questions, quizContainer);
+nextQuestion(); 
+    
 
-function showResults(){}
-
-var questionGenerator = [
-    {
-        question: "Sun is gold",
-        answers: {
-            a: "True",
-            b: "False",
-            c: "Maybe"
-        },
-        correctAnswer: "c"
-    },
-    {
-        question: "Sky is blue",
-        answers: {
-            a: "True",
-            b: "False",
-            c: "Maybe"
-        },
-        correctAnswer: "a"
-    },
-    {
-        question: "grass is blue",
-        answers: {
-            a: "True",
-            b: "False",
-            c: "Maybe"
-        },
-        correctAnswer: "b"
-    }
-]
-
-
-submitButton.addEventListener("click", showResults); 
