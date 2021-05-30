@@ -4,10 +4,17 @@ var timerEl = 0;
 var userScore = 0; 
 var userAnswer;
 
+var userInput = document.createElement("input");
+    userInput.type = "text";
+    userInput.id = "initials"
+    userInput.placeholder = "Enter your initials"
+    userInput.className = "userInput"
+    quizContainer.appendChild(userInput); 
+
 var pageBody = document.querySelector("#body");
     pageBody.append(navBar);    
     pageBody.append(quizContainer);
-    
+
 var scoreHeading = document.createElement("h1");
     scoreHeading.textContent = "Your Score: 0";
     scoreHeading.className = "score-header"
@@ -19,14 +26,13 @@ var timerHeading = document.createElement("h2");
     navBar.append(timerHeading); 
 
 function scoreCounter() {
-    userScore += 10; 
+    userScore += 20; 
     scoreHeading.textContent = "Your Score: " + userScore; 
-    
 }
+
 var timeLeft = 59;
 function timer() {
     
-  
     var timeInterval = setInterval(function() {
       if (timeLeft > 1) {
         timerHeading.textContent = "Time: " + timeLeft; 
@@ -44,9 +50,7 @@ function timer() {
         showResults(); 
       }
     
-    }, 1000);
-
-
+    }, 900);
 } 
 
 function minusTime(){
@@ -55,36 +59,60 @@ function minusTime(){
 
 var myQuiz = [
     {
-    question: "What color is the sky?",
-    choices: ["Green", "Blue", "Red", "Yellow", "Orange"],
-    correctAnswer: "Blue"
+    question: "True or False: The DOM is built into the JavaScript language.",
+    choices: ["True", "False"],
+    correctAnswer: "True"
     }, 
     {
-    question: "What city are you in?",
-    choices: ["Phoenix", "Los Angeles", "Tucson", "Chicago"],
-    correctAnswer: "Tucson"
+    question: "The .appendChild() method does which of the following?",
+    choices: ["Adds a text value to the element", 
+              "Adds a class name to the element",
+              "Adds an element into another element after any prexisting content.", 
+              "Adds an element into another element before and prexisting content"
+              ],
+    correctAnswer: "Adds an element into another element after any prexisting content."
     }, 
     {
-    question: "How many hours in a day?",
-    choices: ["24", "34", "23", "19"],
-    correctAnswer: "24"
+    question: "What does event.preventDefault() do?",
+    choices: ["It stops the browser from allowing the form submission event to occur.", 
+              "It stops the browser from reloading the page upon a form submission.", 
+              "It prevents the default browser from accessing your local storage", 
+              "It allows you to customize your browser"],
+    correctAnswer: "It stops the browser from reloading the page upon a form submission."
     },
     {
-    question: "What language are you using?",
-    choices: ["HTML", "JavaScript", "CSS"],
-    correctAnswer: "JavaScript"
-    }
+    question: "The browser event 'submit' allows us to do the following:",
+    choices: ["Submit a form using a button.", 
+              "Submit a form using the Enter key.", 
+              "Submit a form using both a button and the Enter key."],
+    correctAnswer: "Submit a form using both a button and the Enter key."
+    },
+    {
+    question: "How do we use JavaScript to get the information entered into a form’s input field?",
+    choices: ["We can select the form’s input element and use the textContent or innerHTML properties to read its data.", 
+              "We can select the form’s input element and use the value property to read its data.", 
+              "We can select the form itself and use the value property to read all of its data.", 
+              "It allows you to customize your browser"],
+    correctAnswer: "We can select the form’s input element and use the value property to read its data."
+    },
+    {
+    question: "In the DOM’s event object, what does its target property refer to?",
+    choices: ["It refers to the HTML element that was interacted with to dispatch the event.", 
+              "It refers to the HTML element we want to affect as a result of our dispatched event."],          
+    correctAnswer: "It refers to the HTML element that was interacted with to dispatch the event."
+    },
+    {
+    question: "In the DOM’s event object, what does its target property refer to?",
+    choices: ["It refers to the HTML element that was interacted with to dispatch the event.", 
+              "It refers to the HTML element we want to affect as a result of our dispatched event.",],
+                
+    correctAnswer: "It refers to the HTML element that was interacted with to dispatch the event."
+    },
 ]; 
-
 
 var questionIndex = -1; 
 
 function start() {
-    var userInput = document.createElement("input");
-    userInput.type = "text";
-    userInput.placeholder = "Enter your initials"
-    userInput.className = "userInput"
-    quizContainer.appendChild(userInput); 
     
     var startButton = document.createElement("input");
     startButton.type = "button";
@@ -93,8 +121,17 @@ function start() {
     startButton.addEventListener("click", nextQuestion); 
     startButton.addEventListener("click", timer); 
     quizContainer.appendChild(startButton); 
+
+    var quizTitle = document.createElement("H2");
+    quizTitle.textContent = "Code Quiz"
+    quizTitle.className = "title";
+    quizContainer.append(quizTitle); 
+    
 }
 
+function storeInitials() {
+    
+}
 
 function nextQuestion() {
     quizContainer.innerHTML = ""; 
@@ -155,7 +192,6 @@ function nextQuestion() {
 };
 
 
-
 function checkAnswer(event) {
     
     var questionsDivEl = document.querySelectorAll(".option");
@@ -169,7 +205,6 @@ function checkAnswer(event) {
         }
     }
 
-
     if (userAnswer === myQuiz[questionIndex].correctAnswer) {
         nextQuestion(); 
         scoreCounter(); 
@@ -182,14 +217,19 @@ function checkAnswer(event) {
         quizContainer.append(wrongSig); 
         minusTime(); 
     }
-   
 }
 
 function showResults() {
+    var storeUserInput = userInput.value;
+    console.log(storeUserInput);
+
     quizContainer.textContent = ""; 
     var finalScore = document.createElement("h1")
-    finalScore.textContent = " scored: " + userScore; 
+    finalScore.textContent = storeUserInput + " scored: " + userScore; 
     quizContainer.append(finalScore); 
+
+    
+    
 } 
 
 start();
