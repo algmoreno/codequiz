@@ -18,7 +18,7 @@
     padding-top: 30px;
     width: 300px;
     font-family: Arial, Helvetica, sans-serif;
-
+    font-size: 34px;
 }
 
 .time-header {
@@ -46,6 +46,10 @@
     margin-left: 375px; 
 }
 
+.question-text {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .userInput {
     flex: 1; 
     border-radius: 4px;
@@ -68,3 +72,11 @@
 .nextBtn {
     margin-bottom: -20px;
 }
+
+.wrong-text {
+    color: rgb(255, 0, 0);
+    opacity: 60%; 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+

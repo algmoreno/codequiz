@@ -23,28 +23,10 @@ function scoreCounter() {
     scoreHeading.textContent = "Your Score: " + userScore; 
     
 }
-var timeLeft = 30;
-// function minusTimer() {
-//     var questionsDivEl = document.querySelectorAll(".question");
-
-//     for (i=0; i<questionsDivEl.length; i++) {
-//         var elementCheck = questionsDivEl[i].checked;
-//         var element = questionsDivEl[i].value; 
-
-//         if (elementCheck === true) {
-//             userAnswer = element 
-//         }
-//     }
-
-
-//     if (userAnswer === !myQuiz[questionIndex].correctAnswer) {
-//         timeLeft -= 10; 
-//     }
-// }
+var timeLeft = 59;
 function timer() {
     
   
-    // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function() {
       if (timeLeft > 1) {
         timerHeading.textContent = "Time: " + timeLeft; 
@@ -60,14 +42,16 @@ function timer() {
         timerHeading.textContent = "";
         clearInterval(timeInterval);
         showResults(); 
-  
       }
-
     
     }, 1000);
+
+
 } 
 
-
+function minusTime(){
+    timeLeft -= 10; 
+}
 
 var myQuiz = [
     {
@@ -119,6 +103,7 @@ function nextQuestion() {
     var divEl = document.createElement("div");
     divEl.setAttribute ("id", "questionsDiv")
     var pEl = document.createElement("p");
+    pEl.className = "question-text";
     pEl.textContent = question; 
     divEl.append(pEl); 
     
@@ -148,8 +133,7 @@ function nextQuestion() {
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "Next question";
-        nextButton.addEventListener("click", checkAnswer);
-        nextButton.addEventListener("click", timer); 
+        nextButton.addEventListener("click", checkAnswer); 
         quizContainer.appendChild(nextButton);
     }
 
@@ -164,9 +148,7 @@ function nextQuestion() {
     
 };
 
-function showResults() {
-    console.log("aaassss")
-} 
+
 
 function checkAnswer(event) {
     
@@ -188,11 +170,17 @@ function checkAnswer(event) {
     }
 
     else {
-        console.log(false);
+        var wrongSig = document.createElement("h3");
+        wrongSig.textContent = "Incorrect";
+        wrongSig.className = "wrong-text";
+        quizContainer.append(wrongSig); 
+        minusTime(); 
     }
-
-
    
 }
+
+function showResults() {
+    var showScores = document.createElement("")
+} 
 
 start();
