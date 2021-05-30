@@ -82,7 +82,7 @@ var questionIndex = -1;
 function start() {
     var userInput = document.createElement("input");
     userInput.type = "text";
-    userInput.placeholder = "Enter your initials here"
+    userInput.placeholder = "Enter your initials"
     userInput.className = "userInput"
     quizContainer.appendChild(userInput); 
     
@@ -186,7 +186,10 @@ function checkAnswer(event) {
 }
 
 function showResults() {
-    var showScores = document.createElement("")
+    quizContainer.textContent = ""; 
+    var finalScore = document.createElement("h1")
+    finalScore.textContent = " scored: " + userScore; 
+    quizContainer.append(finalScore); 
 } 
 
 start();
