@@ -1,9 +1,73 @@
 var quizContainer = document.querySelector("#quizContainer"); 
-var scoreCounter= 0; 
+var navBar = document.querySelector("#nav")
+var timerEl = 0;
+var userScore = 0; 
+var userAnswer;
 
-var scoreCount = function () {
+var pageBody = document.querySelector("#body");
+    pageBody.append(navBar);    
+    pageBody.append(quizContainer);
+    
+var scoreHeading = document.createElement("h1");
+    scoreHeading.textContent = "Your Score: 0";
+    scoreHeading.className = "score-header"
+    navBar.append(scoreHeading); 
+
+var timerHeading = document.createElement("h2");
+    timerHeading.textContent = "Time: "
+    timerHeading.className = "time-header"
+    navBar.append(timerHeading); 
+
+function scoreCounter() {
+    userScore += 10; 
+    scoreHeading.textContent = "Your Score: " + userScore; 
     
 }
+var timeLeft = 30;
+// function minusTimer() {
+//     var questionsDivEl = document.querySelectorAll(".question");
+
+//     for (i=0; i<questionsDivEl.length; i++) {
+//         var elementCheck = questionsDivEl[i].checked;
+//         var element = questionsDivEl[i].value; 
+
+//         if (elementCheck === true) {
+//             userAnswer = element 
+//         }
+//     }
+
+
+//     if (userAnswer === !myQuiz[questionIndex].correctAnswer) {
+//         timeLeft -= 10; 
+//     }
+// }
+function timer() {
+    
+  
+    // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function() {
+      if (timeLeft > 1) {
+        timerHeading.textContent = "Time: " + timeLeft; 
+        timeLeft--;
+      }
+  
+      else if (timeLeft === 1) {
+      timerHeading.textContent = "Time: " + timeLeft;
+      timeLeft--;
+      }
+  
+      else {
+        timerHeading.textContent = "";
+        clearInterval(timeInterval);
+        showResults(); 
+  
+      }
+
+    
+    }, 1000);
+} 
+
+
 
 var myQuiz = [
     {
@@ -35,6 +99,7 @@ function start() {
     var userInput = document.createElement("input");
     userInput.type = "text";
     userInput.placeholder = "Enter your initials here"
+    userInput.className = "userInput"
     quizContainer.appendChild(userInput); 
     
     var startButton = document.createElement("input");
@@ -42,6 +107,7 @@ function start() {
     startButton.value = "Begin!";
     startButton.className = "startBtn"
     startButton.addEventListener("click", nextQuestion); 
+    startButton.addEventListener("click", timer); 
     quizContainer.appendChild(startButton); 
 }
 
@@ -83,6 +149,7 @@ function nextQuestion() {
         nextButton.type = "button";
         nextButton.value = "Next question";
         nextButton.addEventListener("click", checkAnswer);
+        nextButton.addEventListener("click", timer); 
         quizContainer.appendChild(nextButton);
     }
 
@@ -98,11 +165,11 @@ function nextQuestion() {
 };
 
 function showResults() {
-
-}
+    console.log("aaassss")
+} 
 
 function checkAnswer(event) {
-    var userAnswer 
+    
     var questionsDivEl = document.querySelectorAll(".question");
 
     for (i=0; i<questionsDivEl.length; i++) {
@@ -117,7 +184,7 @@ function checkAnswer(event) {
 
     if (userAnswer === myQuiz[questionIndex].correctAnswer) {
         nextQuestion(); 
-        scoreCounter +5; 
+        scoreCounter(); 
     }
 
     else {
