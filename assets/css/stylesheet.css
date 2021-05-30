@@ -31,7 +31,6 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
 .quizContainer {
     padding-top: 100px;
     background-color: rgb(108, 179, 179);
@@ -46,13 +45,38 @@
     margin-left: 375px; 
 }
 
+
 .question-text {
     font-size: 24px;
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: -35px;
+    margin-bottom: 70px;
 }
+
+.label{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.option {
+    line-height: 3;
+    opacity: 80%; 
+    width: 18px;
+    height: 18px;
+}
+
+.options-div {
+    flex-wrap: wrap; 
+    margin-top: -25px;
+}
+
 .userInput {
     flex: 1; 
-    border-radius: 4px;
+    width: 170px;
+    border-color: rgb(37, 70, 131);
+    border-radius: 10px;
+    border-width: 5px;
     background-color: rgb(255, 255, 255);
     margin-top: 80px;
     margin-right: 5px;
@@ -62,15 +86,33 @@
 .startBtn {
     flex: 1;
     margin-top: 10px;
-    height: 25px; 
-    width: 55px;
-    border-radius: 20px;
+    height: 75px; 
+    width: 75px;
+    border-radius: 80px;
     border-color: black;
-
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(138, 219, 219);
 }
 
-.nextBtn {
-    margin-bottom: -20px;
+.startBtn:hover{
+    opacity: 80%;
+    background-color: white;
+}
+
+.next-sub-btn {
+    margin-top: 40px;
+    width: 150px;
+    border-color: rgb(37, 70, 131);
+    border-radius: 10px;
+    border-width: 5px;
+    font-style: italic; 
+    background-color: rgb(138, 219, 219);
+}
+
+.next-sub-btn:hover {
+    opacity: 80%;
+    background-color: white;
 }
 
 .wrong-text {

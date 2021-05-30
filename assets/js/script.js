@@ -102,17 +102,20 @@ function nextQuestion() {
     var question = myQuiz[questionIndex].question 
     var divEl = document.createElement("div");
     divEl.setAttribute ("id", "questionsDiv")
+    divEl.className = "options-div";
+
     var pEl = document.createElement("p");
     pEl.className = "question-text";
     pEl.textContent = question; 
-    divEl.append(pEl); 
+    quizContainer.append(pEl); 
     
 
         for (var i=0; i < myQuiz[questionIndex].choices.length; i++) {
             var radioButton = document.createElement("input");
             radioButton.setAttribute ("type","radio"); 
             radioButton.setAttribute ("name", "userAnswer");
-            radioButton.setAttribute ("class", "question");
+            // radioButton.setAttribute ("class", "question");
+            radioButton.className = "option"; 
             radioButton.setAttribute ("value", myQuiz[questionIndex].choices[i]);
             radioButton.setAttribute ("id", myQuiz[questionIndex].choices[i]);
         
@@ -120,6 +123,7 @@ function nextQuestion() {
             var label = document.createElement("label")
             label.setAttribute ("for", myQuiz[questionIndex].choices[i]);
             label.textContent = myQuiz[questionIndex].choices[i]; 
+            label.className = "label";
             
             var br = document.createElement("br")
             label.append(br); 
@@ -133,6 +137,7 @@ function nextQuestion() {
         var nextButton = document.createElement("input");
         nextButton.type = "button";
         nextButton.value = "Next question";
+        nextButton.className = "next-sub-btn"; 
         nextButton.addEventListener("click", checkAnswer); 
         quizContainer.appendChild(nextButton);
     }
@@ -141,6 +146,7 @@ function nextQuestion() {
         var submitButton = document.createElement("input");
         submitButton.type = "button";
         submitButton.value = "Submit";
+        submitButton.className = "next-sub-btn"; 
         submitButton.addEventListener("click", showResults);
         quizContainer.appendChild(submitButton); 
     }
@@ -152,7 +158,7 @@ function nextQuestion() {
 
 function checkAnswer(event) {
     
-    var questionsDivEl = document.querySelectorAll(".question");
+    var questionsDivEl = document.querySelectorAll(".option");
 
     for (i=0; i<questionsDivEl.length; i++) {
         var elementCheck = questionsDivEl[i].checked;
